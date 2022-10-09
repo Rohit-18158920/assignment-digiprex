@@ -16,18 +16,10 @@ let mailOptions = {
     html: ''
 }
 
-async function sendEmail(userInfo) {
+function sendEmail(userInfo) {
     mailOptions.html = getEmailHtml(userInfo);
     mailOptions.to = userInfo.email;
-    try{
-    let result = await transporter.sendMail(mailOptions);
-    result.status = 200;
-    return result;
-    } catch(err) {
-        console.log(err);
-        err.status = 400;
-        return err;
-    }
+    return transporter.sendMail(mailOptions);
 };
 
 function getEmailHtml(userInfo) {

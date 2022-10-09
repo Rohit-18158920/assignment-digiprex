@@ -26,7 +26,6 @@ async function getcartToken() {
         let currentDate = new Date();
         currentDate.setSeconds(0);
         currentDate.setMilliseconds(0);
-        console.log('currentDate'+ currentDate);
         result = await abandonedCartModel
                 .find(
                     { next_schedule: currentDate, status: { $ne: 4 }, completed: false }
@@ -40,7 +39,7 @@ async function getcartToken() {
 async function getCartInfo() {
     let result = [];
     try {
-        result = await abandonedCartModel.find();
+        result = await abandonedCartModel.find().sort({completed: -1});
     } catch (err) {
         console.log(err);
     }

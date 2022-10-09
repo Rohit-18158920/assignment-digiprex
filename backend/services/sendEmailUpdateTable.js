@@ -9,11 +9,15 @@ async function sendEmailUpdateTable() {
                 const cartToken = cartTokenObject.cart_token;
                 const result = await dbUtil.getCartInfoByToken(cartToken);
                 if(result.length>0) {
-                const sendEmailResult = await mailer.sendEmail(result[0]);
-                if(sendEmailResult.status === 200) {
-                    await dbUtil.updateStatus(cartToken);
+                    mailer.sendEmail(result[0])
+                    .then(async info => {
+                        console.log(info);
+                        await dbUtil.updateStatus(cartToken);
+                    })
+                    .catch(err => {
+                        console.log("Failed with response code:: "+err.responseCode);
+                    })
                 }
-            }
 
             })
         }
