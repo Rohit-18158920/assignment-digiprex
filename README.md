@@ -18,3 +18,5 @@
 
 - ## Frontend Service
     The frontend applciation just retrieves the information related to the abandoned cart and displays then in a data table. It has few addition features like filter and pagination, view order info by clicking the order info field.
+
+### Please Note the api call to update completion status has been set as get call since there was no UI for the website, once customer hits the link the update status api call will be invoked from device which is always a get call.
