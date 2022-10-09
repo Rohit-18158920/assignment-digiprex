@@ -21,11 +21,11 @@ router.post("/addData", async (req, res) => {
             };
         }
         const model = validator.removefields(body);
-        let result = await dbUtil.saveCartInfo(model);
+        const result = await dbUtil.saveCartInfo(model);
         if (result.code !== 200) {
             throw result;
         }
-        res.status(200).json({ result });
+        res.status(200).json({ message: "Successfully inserted data to database" });
     } catch (err) {
         let code = err.code || err.status;
         let message = err.message || "Failed to insert record";
